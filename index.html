@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Technology Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f9;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #1e1e2f;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #00c8ff;
+    }
+
+    .sidebar a {
+      color: #cdd0d4;
+      text-decoration: none;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .sidebar a:hover {
+      color: #00c8ff;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 15px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Chatbox */
+    .chatbox {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 600px;
+    }
+
+    .messages {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    .message {
+      margin: 5px 0;
+    }
+
+    .user {
+      text-align: right;
+      color: #007bff;
+    }
+
+    .ai {
+      text-align: left;
+      color: #28a745;
+    }
+
+    .input-area {
+      display: flex;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .input-area button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .input-area button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>AI Dashboard</h2>
+    <a href="#">Home</a>
+    <a href="#">Analytics</a>
+    <a href="#">AI Chat</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="header">
+      <h1>Welcome to AI Tech Dashboard</h1>
+    </div>
+    <div class="content">
+      <div class="chatbox">
+        <h3>AI Assistant</h3>
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+          <input type="text" id="userInput" placeholder="Ask something..." />
+          <button onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById("messages");
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      // Display user message
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.innerText = "You: " + text;
+      messages.appendChild(userMsg);
+
+      // Fake AI response
+      const aiResponse = getAIResponse(text);
+      const aiMsg = document.createElement("div");
+      aiMsg.className = "message ai";
+      aiMsg.innerText = "AI: " + aiResponse;
+      messages.appendChild(aiMsg);
+
+      // Clear input
+      input.value = "";
+
+      // Scroll to bottom
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getAIResponse(input) {
+      // Simulated simple AI responses
+      const lower = input.toLowerCase();
+      if (lower.includes("hello")) return "Hi there! How can I assist you today?";
+      if (lower.includes("weather")) return "It's always sunny in the cloud ☁️.";
+      if (lower.includes("help")) return "Sure! Ask me anything about our AI platform.";
+      return "I'm here to help. Please elaborate your question.";
+    }
+  </script>
+</body>
+</html>
